@@ -1,0 +1,33 @@
+version: '3'
+services:
+ backend-node:
+  image: node
+  container_name: backend-node
+  build:
+   context: examentecnico-yorlin-nodejs
+  networks:
+   - net
+ reverse-proxy-nginx:
+  image: nginx
+  container_name: reverse-proxy-nginx
+  ports:
+   - "80:80"
+  build:
+   context: examentecnico-yorlin-nginx
+  networks:
+   - net
+ pg:
+  image: postgres
+  container_name: examentecnico-yorlin-postgres
+  ports:
+   - "5432:5432"
+  environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: testsuma
+  volumes:
+   - ./retobase-postgres/db_data:/var/lib/postgresql/data
+  networks:
+   - net
+networks:
+ net:

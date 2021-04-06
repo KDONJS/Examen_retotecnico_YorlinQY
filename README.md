@@ -1,1 +1,0 @@
-# Examen_retotecnico_YorlinQY
